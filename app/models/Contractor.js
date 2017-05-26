@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const Contractor = new mongoose.Schema({
-  name: String,
+  firstName: String,
   picture: String,
   typeOfWork: {
     type: String,
