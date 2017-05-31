@@ -9,7 +9,13 @@ const Contractor = new mongoose.Schema({
     enum: ['plumbing', 'construction', 'electrical']
   },
   phone: String,
+  rating: Number,
+  latestReview: {
+  	body: String,
+  	author: String
+  }
   location: { type: [Number], index: '2dsphere'}
-}, { timestamps: true });
+}, { timestamps: true }), 
+	
 
 module.exports = mongoose.model('Contractor', Contractor);
