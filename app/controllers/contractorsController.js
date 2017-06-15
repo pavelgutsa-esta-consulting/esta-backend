@@ -1,7 +1,6 @@
 const _ = require('lodash');
 const wrap = require('../common/expressAsyncWrap');
 const Contractor = require('../models/Contractor');
-const logger = require('../services/logger');
 
 async function findContractors(req, res, next) {
   req.checkQuery('lat').notEmpty();
@@ -17,17 +16,15 @@ async function findContractors(req, res, next) {
   const radius = Number(req.query.radius);
 
   const radians = miles => miles / 3959;
-  
-  logger.info('Searching at longtitude=', longtitude,', lattitude=', lattitude,', radius=',radius);
 
   const query = {
-    typeOfWork: type,
+    jobTypes: type,
     location: {
-      $geoWithin: { $centerSphere: [[longtitude, lattitude], radians(radius)] }
+      $geoWithin: { $centerSphere: [[lattitude, longtitude], radians(radius)] }
     }
   };
 
-  const contractors = await Contractor.find(_.omit(query, _.isUndefined));
+  const contractors = await Contractor.find(_.omit(query, _.isUndefined)).limit(100);
   res.send(contractors);
 }
 

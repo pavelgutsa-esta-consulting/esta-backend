@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const logger = require('../services/logger');
 
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGO_URI);
+module.exports = mongoose.connect(process.env.MONGO_URI);
 
 mongoose.connection.on('error', err => {
   logger.error(err);
