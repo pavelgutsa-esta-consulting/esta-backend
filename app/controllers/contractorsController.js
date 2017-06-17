@@ -20,7 +20,7 @@ async function findContractors(req, res, next) {
   const query = {
     jobTypes: type,
     location: {
-      $geoWithin: { $centerSphere: [[lattitude, longtitude], radians(radius)] }
+      $geoWithin: { $centerSphere: [[longtitude, lattitude], radians(radius)] }
     }
   };
 
